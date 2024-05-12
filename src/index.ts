@@ -6,6 +6,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 import myUserRoute from "./routes/MyUserRoutes";
 import myStoreRoute from "./routes/MyStoreRoute";
+import storeRoute from "./routes/StoreRoutes";
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(() => {
   console.log("connected to database");
@@ -28,6 +29,7 @@ app.get("/health", (req: Request, res: Response) => {
 
 app.use("/api/my/store", myStoreRoute);
 app.use("/api/my/user", myUserRoute);
+app.use("/api/store", storeRoute);
 
 const port = 5000;
 
