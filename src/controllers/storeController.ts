@@ -1,5 +1,24 @@
+import mongoose from "mongoose";
 import Store from "../models/store";
 import { Request, Response } from "express";
+import { ObjectId } from "mongodb";
+
+const getStore = async (req: Request, res: Response) => {
+  try {
+    const storeId = req.params.storeId;
+
+    const store = await Store.findById(storeId);
+
+    if (!store) {
+      return res.status(404).json({ message: "Store not found" });
+    }
+
+    res.json(store);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "something went wrong" });
+  }
+};
 
 const searchStore = async (req: Request, res: Response) => {
   try {
@@ -69,4 +88,5 @@ const searchStore = async (req: Request, res: Response) => {
 
 export default {
   searchStore,
+  getStore,
 };

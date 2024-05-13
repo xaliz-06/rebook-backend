@@ -10,4 +10,14 @@ router.get(
   storeController.searchStore
 );
 
+router.get(
+  "/:storeId",
+  param("storeId")
+    .isString()
+    .trim()
+    .notEmpty()
+    .withMessage("storeId is required and must be a valid parameter"),
+  storeController.getStore
+);
+
 export default router;
